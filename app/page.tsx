@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ChevronRight, GraduationCap, BookOpen, Award, Users, Calendar, MessageSquare } from "lucide-react"
+import Chatbot from "@/components/chatbot"
 
 export default function Home() {
   return (
@@ -239,8 +240,10 @@ export default function Home() {
               <p className="text-muted-foreground mb-4">
                 Have questions? Our support team is available to help you with course selection, enrollment, and more.
               </p>
-              <Button variant="outline" className="w-full">
-                Chat with Us
+              <Button variant="outline" className="w-full" asChild>
+                <a href="https://wa.me/916305771064" target="_blank" rel="noopener noreferrer">
+                  Chat with Us on WhatsApp
+                </a>
               </Button>
             </div>
 
@@ -262,8 +265,8 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Button variant="outline" className="w-full">
-                View All Events
+              <Button variant="outline" className="w-full" asChild>
+                <Link href="/events">View All Events</Link>
               </Button>
             </div>
 
@@ -276,8 +279,8 @@ export default function Home() {
               <p className="text-muted-foreground mb-4">
                 Join our vibrant community of learners. Discuss courses, share resources, and connect with peers.
               </p>
-              <Button variant="outline" className="w-full">
-                Join Community
+              <Button variant="outline" className="w-full" asChild>
+                <Link href="/community">Join Community</Link>
               </Button>
             </div>
           </div>
@@ -305,6 +308,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Chatbot Component */}
+      <Chatbot />
     </div>
   )
 }

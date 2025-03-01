@@ -171,7 +171,9 @@ export default function AboutPage() {
               empowering learners.
             </p>
             <Button asChild>
-              <Link href="/contact">Join Our Team</Link>
+              <a href="https://wa.me/916305771064" target="_blank" rel="noopener noreferrer">
+                Chat with Us on WhatsApp
+              </a>
             </Button>
           </div>
         </div>

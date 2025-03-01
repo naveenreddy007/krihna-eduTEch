@@ -27,10 +27,10 @@
     "@radix-ui/react-progress": "^1.1.1",
     "@radix-ui/react-radio-group": "^1.2.2",
     "@radix-ui/react-scroll-area": "^1.2.2",
-    "@radix-ui/react-select": "latest",
+    "@radix-ui/react-select": "^2.1.4",
     "@radix-ui/react-separator": "^1.1.1",
     "@radix-ui/react-slider": "^1.2.2",
-    "@radix-ui/react-slot": "latest",
+    "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-switch": "^1.1.2",
     "@radix-ui/react-tabs": "^1.1.2",
     "@radix-ui/react-toast": "^1.2.4",
@@ -46,7 +46,7 @@
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
     "next": "14.2.16",
-    "next-themes": "^0.4.4",
+    "next-themes": "latest",
     "react": "^18",
     "react-day-picker": "8.10.1",
     "react-dom": "^18",
@@ -58,8 +58,12 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
     "zod": "^3.24.1",
-    "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "ws": "latest",
+    "@emotion/is-prop-valid": "latest",
+    "openai": "latest",
+    "ai": "latest",
+    "@ai-sdk/openai": "latest",
+    "framer-motion": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
@@ -68,5 +72,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@10.4.0+sha512.6b849d0787d97f8f4e1f03a9b8ff8f038e79e153d6f11ae539ae7c435ff9e796df6a862c991502695c7f9e8fac8aeafc1ac5a8dab47e36148d183832d886dd52"
 }
