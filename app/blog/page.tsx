@@ -101,7 +101,7 @@ export default function BlogPage() {
             <div className="grid md:grid-cols-2">
               <div className="relative h-64 md:h-auto">
                 <Image
-                  src="/placeholder.svg?height=600&width=800&text=Featured+Post"
+                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop"
                   alt="Featured Post"
                   fill
                   className="object-cover"
@@ -148,7 +148,15 @@ export default function BlogPage() {
                   <div key={post.id} className="glass-card rounded-lg overflow-hidden">
                     <div className="grid md:grid-cols-[300px_1fr]">
                       <div className="relative h-48 md:h-auto">
-                        <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
+                        <Image
+                          src={
+                            post.image ||
+                            `https://placehold.co/600x400/003366/ffffff?text=${encodeURIComponent(post.title.substring(0, 20))}`
+                          }
+                          alt={post.title}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
                       <div className="p-6">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">

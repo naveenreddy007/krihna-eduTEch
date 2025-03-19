@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { Search, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,30 +10,15 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
 
-  // Close menu when resizing to larger screens
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setIsMenuOpen(false)
-      }
-    }
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/placeholder.svg?height=40&width=40"
-              alt="Krishna EduTech Logo"
-              width={40}
-              height={40}
-              className="rounded-md"
-            />
-            <span className="hidden font-bold text-primary sm:inline-block">Krishna EduTech</span>
+            <div className="flex items-center justify-center w-10 h-10 bg-primary text-primary-foreground rounded-md font-bold text-xl">
+              K
+            </div>
+            <span className="hidden font-bold text-primary md:inline-block">Krishna EduTech</span>
           </Link>
         </div>
 
@@ -89,7 +73,7 @@ export default function Header() {
             className="flex items-center justify-center rounded-md w-8 h-8 md:hidden hover:bg-muted"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle menu</span>
           </button>
         </div>
@@ -97,8 +81,8 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="fixed inset-0 top-16 z-50 bg-white/90 backdrop-blur-sm md:hidden">
-          <nav className="container grid gap-6 p-6 overflow-y-auto max-h-[calc(100vh-4rem)] bg-white">
+        <div className="fixed inset-0 top-16 z-50 bg-white md:hidden">
+          <nav className="container grid gap-6 p-6">
             <Link
               href="/"
               className="flex items-center gap-2 text-lg font-semibold"
@@ -142,7 +126,7 @@ export default function Header() {
               Contact Us
             </Link>
 
-            <div className="mt-6 space-y-4">
+            <div className="mt-6 space-y-2">
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input type="search" placeholder="Search courses..." className="w-full pl-8" />

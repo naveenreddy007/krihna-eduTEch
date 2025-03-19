@@ -12,7 +12,7 @@ export default function TestimonialsPage() {
       course: "B.Tech Bridge Course",
       quote:
         "Krishna EduTech helped me transition from diploma to B.Tech seamlessly. The faculty support was exceptional and the curriculum was perfectly designed to bridge the knowledge gap. I'm now pursuing my B.Tech with confidence.",
-      image: "/placeholder.svg?height=100&width=100&text=PS",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop",
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ export default function TestimonialsPage() {
       course: "SSC Exam Preparation",
       quote:
         "I cleared my SSC exam in the first attempt thanks to the structured curriculum and mock tests provided by Krishna EduTech. The faculty's guidance on exam strategy was invaluable. I've now secured a government job that I always dreamed of.",
-      image: "/placeholder.svg?height=100&width=100&text=RV",
+      image: "https://images.unsplash.com/photo-1618641986557-1ecd230959aa?q=80&w=300&auto=format&fit=crop",
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ export default function TestimonialsPage() {
       course: "Diploma in Computer Science",
       quote:
         "The practical approach to teaching helped me gain industry-relevant skills that landed me a great internship. The labs and projects were designed to give us real-world experience. I'm grateful to Krishna EduTech for kickstarting my career in tech.",
-      image: "/placeholder.svg?height=100&width=100&text=AP",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=300&auto=format&fit=crop",
     },
     {
       id: 4,
@@ -39,7 +39,7 @@ export default function TestimonialsPage() {
       course: "Bank PO Preparation",
       quote:
         "After multiple failed attempts at clearing the Bank PO exam, I joined Krishna EduTech. Their focused approach and personalized attention helped me understand my weaknesses and work on them. I finally cleared the exam and am now working at a leading bank.",
-      image: "/placeholder.svg?height=100&width=100&text=VS",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=300&auto=format&fit=crop",
     },
     {
       id: 5,
@@ -48,7 +48,7 @@ export default function TestimonialsPage() {
       course: "B.Sc in Data Science",
       quote:
         "The B.Sc in Data Science program at Krishna EduTech is comprehensive and up-to-date with industry trends. The faculty members are experienced professionals who bring real-world insights into the classroom. I'm now working as a junior data analyst.",
-      image: "/placeholder.svg?height=100&width=100&text=MR",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&auto=format&fit=crop",
     },
     {
       id: 6,
@@ -57,7 +57,7 @@ export default function TestimonialsPage() {
       course: "M.Tech in AI & ML",
       quote:
         "The advanced curriculum and research opportunities in the M.Tech program helped me specialize in AI & ML. The industry partnerships provided networking opportunities that led to my current role at a leading tech company. Krishna EduTech truly enables dreams!",
-      image: "/placeholder.svg?height=100&width=100&text=AK",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop",
     },
   ]
 
@@ -84,7 +84,7 @@ export default function TestimonialsPage() {
                 <div className="flex items-start mb-4">
                   <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-primary">
                     <Image
-                      src={testimonial.image || "/placeholder.svg"}
+                      src={testimonial.image || "https://placehold.co/100x100/003366/ffffff?text=Profile"}
                       alt={testimonial.name}
                       fill
                       className="object-cover"
@@ -115,7 +115,7 @@ export default function TestimonialsPage() {
             <div className="grid md:grid-cols-2">
               <div className="relative h-64 md:h-auto">
                 <Image
-                  src="/placeholder.svg?height=400&width=400&text=Featured+Student"
+                  src="https://images.unsplash.com/photo-1531891570158-e71b35a485bc?q=80&w=1064&auto=format&fit=crop"
                   alt="Featured Student"
                   fill
                   className="object-cover"
@@ -162,7 +162,7 @@ export default function TestimonialsPage() {
               <div key={index} className="glass-card rounded-lg overflow-hidden">
                 <div className="relative h-48">
                   <Image
-                    src={`/placeholder.svg?height=300&width=500&text=Video+Testimonial+${index}`}
+                    src={`https://images.unsplash.com/photo-${index === 1 ? "1522661067900-ab829854a57f" : index === 2 ? "1522202176034-be4f30a29cba" : "1543269865-4430f191baf6"}?q=80&w=500&auto=format&fit=crop`}
                     alt={`Video Testimonial ${index}`}
                     fill
                     className="object-cover"

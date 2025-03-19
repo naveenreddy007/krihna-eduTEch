@@ -1,225 +1,214 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ChevronRight, GraduationCap, BookOpen, Award, Users, Calendar, MessageSquare } from "lucide-react"
-import Chatbot from "@/components/chatbot"
+"use client"
 
-export default function Home() {
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react"
+
+export default function ContactPage() {
+  const [formSubmitted, setFormSubmitted] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // In a real implementation, you would handle form submission here
+    setFormSubmitted(true)
+
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setFormSubmitted(false)
+      e.target.reset()
+    }, 3000)
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 lg:py-36 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/placeholder.svg?height=1080&width=1920"
-            alt="Students learning"
-            fill
-            className="object-cover opacity-20"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-transparent" />
-        </div>
-
-        <div className="container relative z-10">
-          <div className="max-w-3xl mx-auto text-center md:text-left md:mx-0">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl mb-6 animate-fade-in">
-              Empowering Every Learner, <br className="hidden sm:inline" />
-              <span className="text-primary">Enabling Every Dream</span>
-            </h1>
-            <p
-              className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in"
-              style={{ animationDelay: "0.1s" }}
-            >
-              Quality education across various fields for students and professionals. Join Krishna EduTech to transform
-              your learning journey.
+      <section className="bg-muted py-12 md:py-24">
+        <div className="container">
+          <div className="max-w-2xl mx-auto text-center">
+            <h1 className="text-4xl font-bold tracking-tight mb-4">Contact Us</h1>
+            <p className="text-muted-foreground text-lg">
+              Have questions or need more information? We're here to help you on your educational journey.
             </p>
-            <div
-              className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-in"
-              style={{ animationDelay: "0.2s" }}
-            >
-              <Button size="lg" asChild>
-                <Link href="/courses">
-                  Explore Courses <ChevronRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link href="/contact">Contact Us</Link>
-              </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Information */}
+      <section className="py-16">
+        <div className="container">
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="glass-card rounded-lg p-6 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Phone className="h-6 w-6 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-2">Phone</h3>
+              <p className="text-muted-foreground mb-4">Our team is available Monday-Saturday, 9am-6pm</p>
+              <a href="tel:+919876543210" className="text-primary font-medium">
+                +91 9876543210
+              </a>
+            </div>
+
+            <div className="glass-card rounded-lg p-6 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Mail className="h-6 w-6 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-2">Email</h3>
+              <p className="text-muted-foreground mb-4">Our support team will get back to you within 24 hours</p>
+              <a href="mailto:info@krishnaedutech.com" className="text-primary font-medium">
+                info@krishnaedutech.com
+              </a>
+            </div>
+
+            <div className="glass-card rounded-lg p-6 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <MapPin className="h-6 w-6 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-2">Office</h3>
+              <p className="text-muted-foreground mb-4">Visit our headquarters in Hyderabad</p>
+              <p className="text-primary font-medium">123 Education Street, Hyderabad, 500001</p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
+
+              {formSubmitted ? (
+                <div className="glass-card rounded-lg p-8 text-center">
+                  <div className="flex justify-center mb-4">
+                    <CheckCircle className="h-12 w-12 text-green-500" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Thank You!</h3>
+                  <p className="text-muted-foreground">
+                    Your message has been sent successfully. We'll get back to you shortly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="glass-card rounded-lg p-6 space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="text-sm font-medium">
+                        Full Name
+                      </label>
+                      <Input id="name" placeholder="John Doe" required />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="text-sm font-medium">
+                        Email Address
+                      </label>
+                      <Input id="email" type="email" placeholder="john@example.com" required />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="text-sm font-medium">
+                        Phone Number
+                      </label>
+                      <Input id="phone" placeholder="+91 9876543210" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="interest" className="text-sm font-medium">
+                        Course Interest
+                      </label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a course" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="before-ssc">Before SSC</SelectItem>
+                          <SelectItem value="after-10th">After 10th</SelectItem>
+                          <SelectItem value="after-inter">After Inter (12th)</SelectItem>
+                          <SelectItem value="after-diploma">After Diploma</SelectItem>
+                          <SelectItem value="after-bsc">After B.Sc</SelectItem>
+                          <SelectItem value="after-btech">After B.Tech</SelectItem>
+                          <SelectItem value="govt-jobs">Govt Job Courses</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-medium">
+                      Message
+                    </label>
+                    <Textarea
+                      id="message"
+                      placeholder="Tell us about your educational goals or any questions you have..."
+                      rows={5}
+                      required
+                    />
+                  </div>
+
+                  <Button type="submit" className="w-full">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
+              )}
+            </div>
+
+            {/* Map */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Find Us</h2>
+              <div className="glass-card rounded-lg overflow-hidden h-[400px] relative">
+                <div className="absolute inset-0 bg-muted flex items-center justify-center">
+                  <p className="text-muted-foreground">Map placeholder - Google Maps would be embedded here</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Courses */}
+      {/* FAQs */}
       <section className="py-16 bg-muted/30">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Featured Courses</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Discover our most popular courses designed to help you achieve your educational and career goals.
-            </p>
-          </div>
+          <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: "SSC Exam Preparation",
-                category: "Before SSC",
-                description: "Comprehensive preparation for Staff Selection Commission exams with expert guidance.",
-                duration: "6 months",
-                fee: "₹15,000",
-              },
-              {
-                title: "Diploma in Computer Science",
-                category: "After 10th",
-                description: "Learn programming, database management, and computer networking fundamentals.",
-                duration: "3 years",
-                fee: "₹45,000/year",
-              },
-              {
-                title: "B.Tech Bridge Course",
-                category: "After Diploma",
-                description: "Specialized course to help diploma holders transition smoothly to B.Tech programs.",
-                duration: "1 year",
-                fee: "₹60,000",
-              },
-            ].map((course, index) => (
-              <div
-                key={index}
-                className="glass-card rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-              >
-                <div className="relative h-48">
-                  <Image
-                    src={`/placeholder.svg?height=300&width=500&text=${encodeURIComponent(course.title)}`}
-                    alt={course.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-4 left-4 bg-primary text-primary-foreground text-xs font-medium px-2 py-1 rounded">
-                    {course.category}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{course.title}</h3>
-                  <p className="text-muted-foreground mb-4">{course.description}</p>
-                  <div className="flex justify-between text-sm mb-4">
-                    <span>Duration: {course.duration}</span>
-                    <span>Fee: {course.fee}</span>
-                  </div>
-                  <Button className="w-full" asChild>
-                    <Link href="/courses">Enroll Now</Link>
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <Button variant="outline" asChild>
-              <Link href="/courses">View All Courses</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Hear from our students who have transformed their careers through our courses.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Priya Sharma",
-                course: "B.Tech Bridge Course",
-                quote:
-                  "Krishna EduTech helped me transition from diploma to B.Tech seamlessly. The faculty support was exceptional!",
-                image: "/placeholder.svg?height=100&width=100&text=PS",
-              },
-              {
-                name: "Rahul Verma",
-                course: "SSC Exam Preparation",
-                quote:
-                  "I cleared my SSC exam in the first attempt thanks to the structured curriculum and mock tests provided.",
-                image: "/placeholder.svg?height=100&width=100&text=RV",
-              },
-              {
-                name: "Ananya Patel",
-                course: "Diploma in Computer Science",
-                quote:
-                  "The practical approach to teaching helped me gain industry-relevant skills that landed me a great internship.",
-                image: "/placeholder.svg?height=100&width=100&text=AP",
-              },
-            ].map((testimonial, index) => (
-              <div key={index} className="glass-card rounded-lg p-6 flex flex-col items-center text-center">
-                <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4 border-4 border-primary">
-                  <Image
-                    src={testimonial.image || "/placeholder.svg"}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <p className="italic mb-4">"{testimonial.quote}"</p>
-                <h4 className="font-semibold">{testimonial.name}</h4>
-                <p className="text-sm text-muted-foreground">{testimonial.course}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <Button variant="outline" asChild>
-              <Link href="/testimonials">Read More Success Stories</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Impact Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Impact</h2>
-            <p className="max-w-2xl mx-auto opacity-90">
-              At Krishna EduTech, we're proud to say we've reached{" "}
-              <span className="font-bold">at least one student from each home</span> in our community.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: <GraduationCap className="h-10 w-10" />, stat: "10,000+", label: "Graduates" },
-              { icon: <BookOpen className="h-10 w-10" />, stat: "50+", label: "Courses" },
-              { icon: <Award className="h-10 w-10" />, stat: "95%", label: "Success Rate" },
-              { icon: <Users className="h-10 w-10" />, stat: "100+", label: "Expert Faculty" },
-            ].map((item, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-                <div className="flex justify-center mb-4">{item.icon}</div>
-                <h3 className="text-3xl font-bold mb-2">{item.stat}</h3>
-                <p>{item.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl font-bold mb-4">Regional Impact</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="space-y-6">
               {[
-                { region: "Hyderabad", students: "4,500+" },
-                { region: "Vijayawada", students: "2,800+" },
-                { region: "Warangal", students: "1,200+" },
-                { region: "Tirupati", students: "950+" },
-                { region: "Guntur", students: "1,500+" },
-                { region: "Karimnagar", students: "750+" },
-              ].map((region, index) => (
-                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <h4 className="font-medium">{region.region}</h4>
-                  <p className="text-sm opacity-90">{region.students} students</p>
+                {
+                  question: "How can I enroll in a course?",
+                  answer:
+                    "You can enroll in a course by visiting our website, selecting the desired course, and clicking on the 'Enroll Now' button. Alternatively, you can visit our office or call our enrollment team for assistance.",
+                },
+                {
+                  question: "What are the payment options available?",
+                  answer:
+                    "We accept various payment methods including credit/debit cards, net banking, UPI, and EMI options. We also offer scholarships and financial aid for eligible students.",
+                },
+                {
+                  question: "Do you offer online courses?",
+                  answer:
+                    "Yes, we offer both online and offline courses. Our online courses provide the same quality education with the flexibility of learning from anywhere.",
+                },
+                {
+                  question: "How can I get career counseling?",
+                  answer:
+                    "You can schedule a career counseling session by filling out the contact form on this page or by calling our counseling team directly.",
+                },
+                {
+                  question: "What is your refund policy?",
+                  answer:
+                    "We offer a 7-day refund policy for most courses if you're not satisfied with the course content. Please refer to the specific course terms for detailed refund policies.",
+                },
+              ].map((faq, index) => (
+                <div key={index} className="glass-card rounded-lg p-6">
+                  <h3 className="text-lg font-bold mb-2">{faq.question}</h3>
+                  <p className="text-muted-foreground">{faq.answer}</p>
                 </div>
               ))}
             </div>
@@ -227,90 +216,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Interactive Elements */}
-      <section className="py-16">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Live Chat */}
-            <div className="glass-card rounded-lg p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <MessageSquare className="h-6 w-6 text-primary" />
-                <h3 className="text-xl font-bold">Live Chat Support</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Have questions? Our support team is available to help you with course selection, enrollment, and more.
-              </p>
-              <Button variant="outline" className="w-full" asChild>
-                <a href="https://wa.me/916305771064" target="_blank" rel="noopener noreferrer">
-                  Chat with Us on WhatsApp
-                </a>
-              </Button>
-            </div>
-
-            {/* Event Calendar */}
-            <div className="glass-card rounded-lg p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Calendar className="h-6 w-6 text-primary" />
-                <h3 className="text-xl font-bold">Upcoming Events</h3>
-              </div>
-              <ul className="space-y-3 mb-4">
-                {[
-                  { name: "Open House", date: "March 15, 2025" },
-                  { name: "Career Counseling Session", date: "March 22, 2025" },
-                  { name: "Workshop on AI & ML", date: "April 5, 2025" },
-                ].map((event, index) => (
-                  <li key={index} className="flex justify-between">
-                    <span>{event.name}</span>
-                    <span className="text-muted-foreground">{event.date}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/events">View All Events</Link>
-              </Button>
-            </div>
-
-            {/* Discussion Forum */}
-            <div className="glass-card rounded-lg p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Users className="h-6 w-6 text-primary" />
-                <h3 className="text-xl font-bold">Student Community</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Join our vibrant community of learners. Discuss courses, share resources, and connect with peers.
-              </p>
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/community">Join Community</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Call to Action */}
-      <section className="py-16 bg-muted">
+      <section className="py-16 bg-primary text-primary-foreground">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Start Your Learning Journey?</h2>
-            <p className="text-muted-foreground mb-8">
+            <p className="opacity-90 mb-8">
               Join thousands of students who have transformed their careers with Krishna EduTech.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link href="/courses">
-                  Explore Courses <ChevronRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link href="/contact">Contact Us</Link>
-              </Button>
-            </div>
+            <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 border-white/30">
+              Explore Courses
+            </Button>
           </div>
         </div>
       </section>
-
-      {/* Chatbot Component */}
-      <Chatbot />
     </div>
   )
 }

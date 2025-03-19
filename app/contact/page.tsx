@@ -73,8 +73,8 @@ export default function ContactPage() {
                 </div>
               </div>
               <h3 className="text-lg font-bold mb-2">Office</h3>
-              <p className="text-muted-foreground mb-4">Visit our headquarters in Jagtial</p>
-              <p className="text-primary font-medium">Bypass road, opposite to bachpan play school, Jagtial 505327</p>
+              <p className="text-muted-foreground mb-4">Visit our headquarters in Hyderabad</p>
+              <p className="text-primary font-medium">123 Education Street, Hyderabad, 500001</p>
             </div>
           </div>
 
@@ -163,15 +163,9 @@ export default function ContactPage() {
             <div>
               <h2 className="text-2xl font-bold mb-6">Find Us</h2>
               <div className="glass-card rounded-lg overflow-hidden h-[400px] relative">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.8891110577387!2d78.91042407498559!3d18.45778458263066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcc9f7b5c8e5c7d%3A0x3d5a7c2c0e8f7f1a!2sKrishna%20Edu%20Tech!5e0!3m2!1sen!2sin!4v1709228148400!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+                <div className="absolute inset-0 bg-muted flex items-center justify-center">
+                  <p className="text-muted-foreground">Map placeholder - Google Maps would be embedded here</p>
+                </div>
               </div>
             </div>
           </div>

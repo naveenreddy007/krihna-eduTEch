@@ -1,0 +1,21 @@
+name: remote ssh command
+on: [push]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: multiple command
+        uses: appleboy/ssh-action@v1
+        with:
+          host: 3.87.155.238
+          username: ubuntu
+          key: ${{ secrets.KEY }}
+          port: 22
+          script: |
+            mkdir /home/ubuntu/edu
+            cd /home/ubuntu/edu
+            rm -rf *
+            git clone https://github.com/naveenreddy007/krihna-eduTEch.git .
+            bun i
+            pm2 start "bun run dev" --name krishna-tech

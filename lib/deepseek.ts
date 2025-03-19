@@ -1,37 +1,28 @@
 const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
 
-export async function callDeepSeekAPI(userQuery: string, context = ""): Promise<BotResponse> {
-  const apiKey = process.env.NEXT_PUBLIC_DEEPSEEK_API_KEY
+export async function callDeepSeekAPI(userQuery: string): Promise<BotResponse> {
+  console.log("Calling DeepSeek API with query:", userQuery)
 
-  if (!apiKey) {
-    console.error("DeepSeek API key is not set")
-    return getFallbackResponse()
-  }
+  const context = `
+You are KrishnaBot, a friendly and knowledgeable AI assistant for Krishna EduTech, an educational platform in India. Your personality is warm, encouraging, and slightly humorous. You specialize in career counseling and providing information about Krishna EduTech's courses.
 
-  const systemPrompt = `
-You are KrishnaBot, a friendly AI assistant from Krishna EduTech. Your goal is to inspire and guide students in their educational journey across various fields. Keep responses brief, positive, and engaging.
+When responding:
+1. Use a conversational tone, as if chatting with a friend.
+2. Occasionally use Indian English expressions to sound more relatable.
+3. Provide specific course recommendations based on the user's interests or questions.
+4. Always end with an open-ended question to keep the conversation going.
 
-Key Points:
-1. Be concise and cheerful in your responses.
-2. Offer quick insights into a wide range of careers and courses, not just engineering.
-3. Provide short, motivational study tips for various subjects.
-4. Give brief, encouraging resume feedback.
-5. Maintain a supportive and optimistic tone.
-6. Remember that Krishna EduTech offers courses for various stages: Before SSC, After 10th, After 12th (Intermediate), After Diploma, After B.Sc, After B.Tech, After Pharm, and Government Job preparation.
-
-Provide a structured response with the following format:
+Respond in a JSON format with the following structure:
 {
-  "greeting": string,
-  "message": string,
-  "options": string[],
-  "insight": string,
-  "encouragement": string
+  "greeting": A warm, personalized greeting (if starting a conversation),
+  "message": Your main response, broken into 2-3 short paragraphs for readability,
+  "courseRecommendation": A specific course recommendation if applicable, or null if not,
+  "followUpQuestion": An engaging question to continue the conversation
 }
 `
 
   const messages = [
-    { role: "system", content: systemPrompt },
-    { role: "user", content: context },
+    { role: "system", content: context },
     { role: "user", content: userQuery },
   ]
 
@@ -39,13 +30,13 @@ Provide a structured response with the following format:
     const response = await fetch(DEEPSEEK_API_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEEPSEEK_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         model: "deepseek-chat",
         messages: messages,
-        max_tokens: 300,
+        max_tokens: 500,
         temperature: 0.7,
         top_p: 0.9,
       }),
@@ -53,17 +44,19 @@ Provide a structured response with the following format:
 
     if (!response.ok) {
       const errorText = await response.text()
-      console.error(`HTTP error! status: ${response.status}, body: ${errorText}`)
-      return getFallbackResponse()
+      console.error(`DeepSeek API error: ${response.status}`, errorText)
+      throw new Error(`DeepSeek API error: ${response.status}`)
     }
 
     const data = await response.json()
 
     if (data.choices && data.choices.length > 0 && data.choices[0].message) {
-      return postProcessResponse(data.choices[0].message.content)
+      const content = data.choices[0].message.content
+      console.log("DeepSeek API response:", content)
+      return JSON.parse(content)
     } else {
       console.error("Unexpected API response format:", data)
-      return getFallbackResponse()
+      throw new Error("Unexpected API response format")
     }
   } catch (error) {
     console.error("Error calling DeepSeek API:", error)
@@ -71,46 +64,21 @@ Provide a structured response with the following format:
   }
 }
 
-function postProcessResponse(response: string): BotResponse {
-  try {
-    const cleanedResponse = response.replace(/^```json\s*/, "").replace(/```\s*$/, "")
-    const structuredResponse = JSON.parse(cleanedResponse) as BotResponse
-
-    if (
-      structuredResponse.greeting &&
-      structuredResponse.message &&
-      structuredResponse.options &&
-      structuredResponse.insight &&
-      structuredResponse.encouragement
-    ) {
-      return structuredResponse
-    }
-  } catch (error) {
-    console.error("Failed to parse structured response:", error)
-    console.log("Raw response:", response)
-  }
-
-  return getFallbackResponse()
-}
-
 function getFallbackResponse(): BotResponse {
   return {
-    greeting: "Namaste! 🌟",
+    greeting: "Hello there!",
     message:
-      "I'm KrishnaBot, your friendly guide at Krishna EduTech. How can I brighten your educational journey today?",
-    options: ["Explore careers", "Discover courses", "Get a study tip", "Resume help", "Exam preparation"],
-    insight:
-      "Did you know? Krishna EduTech offers courses for every stage of your educational journey, from SSC to postgraduate studies!",
-    encouragement: "Remember, your potential is limitless. Let's find the perfect path for you!",
+      "I apologize, but I'm having a bit of trouble accessing my knowledge base at the moment. But no worries, I'm still here to chat! How about we start with you telling me a little bit about your educational interests?",
+    courseRecommendation: null,
+    followUpQuestion: "What subjects or career paths are you most excited about right now?",
   }
 }
 
 export interface BotResponse {
-  greeting: string
+  greeting: string | null
   message: string
-  options: string[]
-  insight: string
-  encouragement: string
+  courseRecommendation: string | null
+  followUpQuestion: string
 }
 
 export interface StructuredResponse {
@@ -121,15 +89,15 @@ export interface StructuredResponse {
     title: string
     description: string
     details: string[]
-    krishnaEduTechOffering?: string
+    krishnaEduTechOffering: string | null
   }[]
   followUp: string
 }
 
 export async function testDeepSeekAPI(): Promise<string> {
   try {
-    const response = await callDeepSeekAPI("Tell me something cool about engineering")
-    console.log("API Response:", response)
+    const response = await callDeepSeekAPI("What courses do you offer for B.Tech graduates?")
+    console.log("API Test Response:", response)
     return "API connection successful! Response: " + JSON.stringify(response)
   } catch (error) {
     console.error("API Test Error:", error)

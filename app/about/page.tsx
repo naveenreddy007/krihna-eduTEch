@@ -1,6 +1,5 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export default function AboutPage() {
   return (
@@ -15,13 +14,8 @@ export default function AboutPage() {
                 We are dedicated to empowering students and professionals with quality education across various fields.
               </p>
             </div>
-            <div className="relative h-64 md:h-80 rounded-lg overflow-hidden">
-              <Image
-                src="/placeholder.svg?height=400&width=600&text=About+Us"
-                alt="About Krishna EduTech"
-                fill
-                className="object-cover"
-              />
+            <div className="relative h-64 md:h-80 rounded-lg overflow-hidden bg-primary/10 flex items-center justify-center">
+              <div className="text-primary font-bold text-xl">Krishna EduTech Campus</div>
             </div>
           </div>
         </div>
@@ -131,30 +125,33 @@ export default function AboutPage() {
                 name: "Dr. Rajesh Kumar",
                 role: "Founder & CEO",
                 bio: "Ph.D. in Education with 20+ years of experience in educational leadership.",
-                image: "/placeholder.svg?height=300&width=300&text=RK",
               },
               {
                 name: "Prof. Sunita Reddy",
                 role: "Academic Director",
                 bio: "Former university professor with expertise in curriculum development.",
-                image: "/placeholder.svg?height=300&width=300&text=SR",
               },
               {
                 name: "Vikram Singh",
                 role: "Technology Head",
                 bio: "Tech innovator with a passion for creating accessible learning platforms.",
-                image: "/placeholder.svg?height=300&width=300&text=VS",
               },
               {
                 name: "Dr. Meena Patel",
                 role: "Student Success Lead",
                 bio: "Dedicated to ensuring every student achieves their full potential.",
-                image: "/placeholder.svg?height=300&width=300&text=MP",
               },
             ].map((member, index) => (
               <div key={index} className="glass-card rounded-lg overflow-hidden">
-                <div className="relative h-64">
-                  <Image src={member.image || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
+                <div className="relative h-64 bg-primary/10 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
+                    <span className="text-primary font-bold text-xl">
+                      {member.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </span>
+                  </div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
@@ -171,9 +168,7 @@ export default function AboutPage() {
               empowering learners.
             </p>
             <Button asChild>
-              <a href="https://wa.me/916305771064" target="_blank" rel="noopener noreferrer">
-                Chat with Us on WhatsApp
-              </a>
+              <Link href="/contact">Join Our Team</Link>
             </Button>
           </div>
         </div>
